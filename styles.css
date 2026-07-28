@@ -263,7 +263,25 @@ body {
   transition: all var(--t) var(--ease);
 }
 .ver-btn:hover { border-color: var(--border2); color: var(--text); }
+.ver-btn { position: relative; }
 .ver-btn.has-update { border-color: rgba(52,211,153,0.5); background: var(--green-soft); color: var(--green); }
+.ver-dot {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 2px var(--bg1);
+  display: none;
+}
+.ver-btn.has-update .ver-dot { display: block; animation: ver-pulse 1.6s var(--ease) infinite; }
+@keyframes ver-pulse {
+  0%   { box-shadow: 0 0 0 2px var(--bg1), 0 0 0 0 rgba(52,211,153,0.55); }
+  70%  { box-shadow: 0 0 0 2px var(--bg1), 0 0 0 7px rgba(52,211,153,0); }
+  100% { box-shadow: 0 0 0 2px var(--bg1), 0 0 0 0 rgba(52,211,153,0); }
+}
 .update-how { margin-top: 12px; font-size: 12.5px; line-height: 1.7; color: var(--text2); }
 .update-how-title { font-weight: 700; color: var(--text); margin-bottom: 4px; }
 .update-how code { font-family: var(--mono); background: var(--bg3); padding: 1px 5px; border-radius: 4px; }

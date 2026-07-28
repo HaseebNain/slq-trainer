@@ -24,7 +24,7 @@ const QUERY_HISTORY_KEY = 'sql_bootcamp_query_history';
 // Bump APP_VERSION and version.json together on every release. The app is
 // offline-first; the update check is a best-effort network call that fails
 // silently when offline.
-const APP_VERSION = '1.0.0';
+const APP_VERSION = '1.0.5';
 const REPO_URL = 'https://github.com/HaseebNain/slq-trainer';
 const UPDATE_CHECK_URL = 'https://raw.githubusercontent.com/HaseebNain/slq-trainer/master/version.json';
 
@@ -448,10 +448,9 @@ async function checkForUpdate(opts) {
     updateInfo.available = !!updateInfo.latest && compareVersions(updateInfo.latest, APP_VERSION) > 0;
     updateInfo.checked = true;
     const btn = document.getElementById('ver-btn');
-    if (btn) {
-      btn.classList.toggle('has-update', updateInfo.available);
-      btn.textContent = updateInfo.available ? `Update to v${updateInfo.latest} ⬆` : `v${APP_VERSION}`;
-    }
+    const label = document.getElementById('ver-label');
+    if (btn) btn.classList.toggle('has-update', updateInfo.available);
+    if (label) label.textContent = updateInfo.available ? `Update to v${updateInfo.latest} ⬆` : `v${APP_VERSION}`;
     if (updateInfo.available && silent) {
       showToast('⬆', 'Update available', `Version ${updateInfo.latest} is out`, 'Open the version badge in the top bar to update.');
     }
@@ -1204,8 +1203,8 @@ async function initDB() {
   updateDailyBtn();
   document.getElementById('sound-btn').textContent = soundOn ? '🔊' : '🔇';
   updateThemeButton();
-  const verBtn = document.getElementById('ver-btn');
-  if (verBtn) verBtn.textContent = `v${APP_VERSION}`;
+  const verLabel = document.getElementById('ver-label');
+  if (verLabel) verLabel.textContent = `v${APP_VERSION}`;
   const allLessons = curriculum.flatMap(d => d.lessons);
   const startLesson = (savedLessonId && allLessons.find(l => l.id === savedLessonId)) || allLessons[0];
   loadLesson(startLesson);
